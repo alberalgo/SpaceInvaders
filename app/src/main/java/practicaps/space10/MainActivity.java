@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private ImageView disparo;
     public float coordenadaX = 0;
     private TextView tou;
-    private float coordenadaDisparo = 0;
+    private float coordenadaDisparo = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
