@@ -3,6 +3,10 @@ package practicaps.space10;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.media.AudioAttributes;
+import android.provider.MediaStore;
+import android.media.SoundPool;
+import android.media.AudioManager;
 
 /**
  * Created by Marco on 21/10/2016.
@@ -16,8 +20,10 @@ public class Disparo implements Runnable {
     private TextView tou;
     private float coordenadaDisparo;
 
-    public Disparo(ImageView nave, ImageView disparo) {
 
+
+
+    public Disparo(ImageView nave, ImageView disparo) {
         this.nave = nave;
         this.disparo = disparo;
     }
@@ -36,6 +42,7 @@ public class Disparo implements Runnable {
 
     public void Disparo(ImageView nave, ImageView disparo) {
         Log.d("Disparo: ", "Se ha producido un disparo");
+
 
         coordenadaDisparo = nave.getY();
 

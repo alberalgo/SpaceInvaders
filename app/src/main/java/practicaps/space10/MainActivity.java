@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.widget.ImageView;
 import android.view.View;
 import android.widget.TextView;
+import android.media.MediaPlayer;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
 
@@ -45,29 +46,15 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         Log.d("Posicion", String.valueOf(size.x));
         Log.d("Posicion", String.valueOf(size.y));
 
+
+        new Musica(this).reproducir();
+
         //ejecuto el hilo
         new Thread(new Disparo(nave ,disparo)).start();
 
     }
 
-    /*
-    public void derecha(View view) {
-        coordenadaX = nave.getX();
-        Log.d("Posicion: ", String.valueOf(coordenadaX));
-        if (coordenadaX < size.x) {
-            nave.setX(nave.getX() + 100);
-        }
-    }
 
-    public void izquierda(View view) {
-        coordenadaX = nave.getX();
-        Log.d("Posicion", String.valueOf(coordenadaX));
-        if (coordenadaX > 0) {
-            nave.setX(nave.getX() - 100);
-        }
-    }
-
-    */
     @Override
     public boolean onTouch(View v, MotionEvent event) {
 
@@ -78,31 +65,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         switch (action) {
             case (MotionEvent.ACTION_DOWN):
 
-
-                /* Comentado, codigo para mover la nave mediante pulsacion en pantalla
-                disparo.setVisibility(View.VISIBLE);
-                disparo.setX(coorX);
-                coordenadaDisparo = 964;
-                for(int i=0; i<100; i++){
-                    coordenadaDisparo = coordenadaDisparo - 5;
-
-                    disparo.setY(coordenadaDisparo);
-                    //SystemClock.sleep(10);
-                    Log.d("PosicionDisparoX: ", String.valueOf(coorX));
-                    Log.d("PosicionDisparoY: ", String.valueOf(coordenadaDisparo));
-                }
-
-                if ( coorX > 300) {
-
-                    nave.setX(nave.getX() + 100);
-                    return true;
-                }
-                if ( coorX < 300) {
-
-                    nave.setX(nave.getX() - 100);
-                    return true;
-                }
-                */
 
             case (MotionEvent.ACTION_MOVE):
                 //Desplaza la nave siguiendo la pulsacion
