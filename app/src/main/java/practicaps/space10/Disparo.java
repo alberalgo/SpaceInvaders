@@ -1,7 +1,5 @@
 package practicaps.space10;
 
-import android.media.AudioManager;
-import android.media.SoundPool;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,12 +15,6 @@ public class Disparo implements Runnable {
     public float coordenadaX = 0;
     private TextView tou;
     private float coordenadaDisparo;
-    private SoundPool soundPool;
-
-
-
-
-
 
     public Disparo(ImageView nave, ImageView disparo) {
 
@@ -38,7 +30,6 @@ public class Disparo implements Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
             Disparo(this.nave, this.disparo);
         }
     }
