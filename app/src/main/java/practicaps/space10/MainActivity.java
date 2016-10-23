@@ -19,7 +19,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private ImageView disparo;
     public float coordenadaX = 0;
     private TextView tou;
-    private float coordenadaDisparo = 1;
+    //private float coordenadaDisparo = 1;
+    public Point size;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,21 +38,23 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         // Coge el objeto display para entrar a los datos de la pantalla
         Display display = getWindowManager().getDefaultDisplay();
         // Carga la resolución con un objeto Point
-        Point size = new Point();
+        size = new Point();
         display.getSize(size);
         //Ahora podemos usar size.x | size.y para obtener el ancho y alto de la pantalla
 
-
+        Log.d("Posicion", String.valueOf(size.x));
+        Log.d("Posicion", String.valueOf(size.y));
 
         //ejecuto el hilo
         new Thread(new Disparo(nave ,disparo)).start();
 
     }
 
+    /*
     public void derecha(View view) {
         coordenadaX = nave.getX();
         Log.d("Posicion: ", String.valueOf(coordenadaX));
-        if (coordenadaX < 968) {
+        if (coordenadaX < size.x) {
             nave.setX(nave.getX() + 100);
         }
     }
@@ -64,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         }
     }
 
-
+    */
     @Override
     public boolean onTouch(View v, MotionEvent event) {
 

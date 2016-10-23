@@ -12,7 +12,7 @@ public class Disparo implements Runnable {
 
     private ImageView nave;
     private ImageView disparo;
-    public float coordenadaX = 0;
+    public float coordenadaX = 10;
     private TextView tou;
     private float coordenadaDisparo;
 
