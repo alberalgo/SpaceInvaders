@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.view.View;
 import android.widget.TextView;
 import android.media.MediaPlayer;
+import android.content.Context;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
 
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private TextView tou;
     //private float coordenadaDisparo = 1;
     public Point size;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +50,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
 
         new Musica(this).reproducir();
+        new Musica(this).reproducir2();
 
         //ejecuto el hilo
-        new Thread(new Disparo(nave ,disparo)).start();
+        new Thread(new Disparo(nave ,disparo, this)).start();
 
     }
 
