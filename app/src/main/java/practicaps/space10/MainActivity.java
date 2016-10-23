@@ -1,9 +1,11 @@
 package practicaps.space10;
 
+import android.graphics.Point;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 import android.view.View;
@@ -17,7 +19,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private ImageView disparo;
     public float coordenadaX = 0;
     private TextView tou;
-    private float coordenadaDisparo = 0;
+    private float coordenadaDisparo = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +33,18 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         disparo = (ImageView) findViewById(R.id.disp);
         tou.setOnTouchListener(this);
 
-        //obtengo el ancho del movil para guardarlo en una variable -> sin implementar, por el momento tamaños a mano
+
+        // Coge el objeto display para entrar a los datos de la pantalla
+        Display display = getWindowManager().getDefaultDisplay();
+        // Carga la resolución con un objeto Point
+        Point size = new Point();
+        display.getSize(size);
+        //Ahora podemos usar size.x | size.y para obtener el ancho y alto de la pantalla
+
+
 
         //ejecuto el hilo
-        new Thread(new Disparo()).start();
-
+        new Thread(new Disparo(nave ,disparo)).start();
 
     }
 
@@ -106,41 +115,5 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 return true;
         }
         return false;
-    }
-
-
-    class Disparo implements Runnable {
-
-        @Override
-        public void run() {
-            while (true) {
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                Disparo();
-            }
-        }
-
-        public void Disparo() {
-            Log.d("Disparo: ", "Se ha producido un disparo");
-            coordenadaDisparo = nave.getY();
-
-            disparo.setX(nave.getX());
-            Log.d("Coordenada disparo: ", String.valueOf(coordenadaDisparo));
-
-            for(int i=0; i<50; i++){
-                int val = i;
-                try {
-                    Thread.sleep(30);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                coordenadaDisparo = coordenadaDisparo - val;
-                Log.d("PUM: ",  String.valueOf(val));
-                disparo.setY(coordenadaDisparo - val*20);
-            }
-        }
     }
 }
