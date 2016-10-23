@@ -34,8 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         //obtengo el ancho del movil para guardarlo en una variable -> sin implementar, por el momento tamaños a mano
 
         //ejecuto el hilo
-        new Thread(new Disparo()).start();
-
+        new Thread(new Disparo(nave ,disparo)).start();
 
     }
 
@@ -109,38 +108,38 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     }
 
 
-    class Disparo implements Runnable {
-
-        @Override
-        public void run() {
-            while (true) {
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                Disparo();
-            }
-        }
-
-        public void Disparo() {
-            Log.d("Disparo: ", "Se ha producido un disparo");
-            coordenadaDisparo = nave.getY();
-
-            disparo.setX(nave.getX());
-            Log.d("Coordenada disparo: ", String.valueOf(coordenadaDisparo));
-
-            for(int i=0; i<50; i++){
-                int val = i;
-                try {
-                    Thread.sleep(30);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                coordenadaDisparo = coordenadaDisparo - val;
-                Log.d("PUM: ",  String.valueOf(val));
-                disparo.setY(coordenadaDisparo - val*20);
-            }
-        }
-    }
+//    class Disparo implements Runnable {
+//
+//        @Override
+//        public void run() {
+//            while (true) {
+//                try {
+//                    Thread.sleep(500);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                Disparo();
+//            }
+//        }
+//
+//        public void Disparo() {
+//            Log.d("Disparo: ", "Se ha producido un disparo");
+//            coordenadaDisparo = nave.getY();
+//
+//            disparo.setX(nave.getX());
+//            Log.d("Coordenada disparo: ", String.valueOf(coordenadaDisparo));
+//
+//            for(int i=0; i<50; i++){
+//                int val = i;
+//                try {
+//                    Thread.sleep(30);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                coordenadaDisparo = coordenadaDisparo - val;
+//                Log.d("PUM: ",  String.valueOf(val));
+//                disparo.setY(coordenadaDisparo - val*20);
+//            }
+//        }
+//    }
 }
