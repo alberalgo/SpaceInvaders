@@ -1,5 +1,6 @@
 package practicaps.space10;
 
+import android.content.Context;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,13 +20,15 @@ public class Disparo implements Runnable {
     public float coordenadaX = 10;
     private TextView tou;
     private float coordenadaDisparo;
+    Musica m;
+    public Context cont;
 
 
 
-
-    public Disparo(ImageView nave, ImageView disparo) {
+    public Disparo(ImageView nave, ImageView disparo, Context c) {
         this.nave = nave;
         this.disparo = disparo;
+        this.cont=c;
     }
 
     @Override
@@ -42,7 +45,7 @@ public class Disparo implements Runnable {
 
     public void Disparo(ImageView nave, ImageView disparo) {
         Log.d("Disparo: ", "Se ha producido un disparo");
-
+        new Musica(cont).reproducir();
 
         coordenadaDisparo = nave.getY();
 
