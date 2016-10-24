@@ -17,18 +17,17 @@ public class Disparo implements Runnable {
 
     private ImageView nave;
     private ImageView disparo;
-    public float coordenadaX = 10;
-    private TextView tou;
     private float coordenadaDisparo;
-    Musica m;
     public Context cont;
+    public Enemigo e;
 
 
 
-    public Disparo(ImageView nave, ImageView disparo, Context c) {
+    public Disparo(ImageView nave, ImageView disparo, Context c, Enemigo enem) {
         this.nave = nave;
         this.disparo = disparo;
         this.cont=c;
+        this.e=enem;
     }
 
     @Override
@@ -60,7 +59,7 @@ public class Disparo implements Runnable {
                 e.printStackTrace();
             }
             coordenadaDisparo = coordenadaDisparo - val;
-            Log.d("PUM: ", String.valueOf(val));
+            Log.d("PUM: ", String.valueOf(coordenadaDisparo));
             disparo.setY(coordenadaDisparo - val * 20);
         }
     }

@@ -9,21 +9,21 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.media.MediaPlayer;
 import android.content.Context;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
 
     //declaro variables para los componentes
 
     private ImageView nave;
+    private ImageView enem;
     private ImageView disparo;
-    public float coordenadaX = 0;
     private TextView tou;
-    //private float coordenadaDisparo = 1;
     public Point size;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         nave = (ImageView) findViewById(R.id.nave_id);
         tou = (TextView) findViewById(R.id.touch);
         disparo = (ImageView) findViewById(R.id.disp);
+        enem = (ImageView) findViewById(R.id.enemy);
         tou.setOnTouchListener(this);
+
 
 
         // Coge el objeto display para entrar a los datos de la pantalla
@@ -45,16 +47,23 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         display.getSize(size);
         //Ahora podemos usar size.x | size.y para obtener el ancho y alto de la pantalla
 
-        Log.d("Posicion", String.valueOf(size.x));
-        Log.d("Posicion", String.valueOf(size.y));
+        Log.d("Ancho del disp", String.valueOf(size.x));
+        Log.d("Alto del disp", String.valueOf(size.y));
 
+
+        //coloco la nave enemiga en el centro del eje X
+        //enem.setX(size.x/2);
+        /*
+        //coloco la nave enemiga en la parte superior del eje Y
+        enem.setY(size.y/2);
+        */
 
         new Musica(this).reproducir();
         new Musica(this).reproducir2();
 
         //ejecuto el hilo
-        new Thread(new Disparo(nave ,disparo, this)).start();
-
+        Enemigo e = new Enemigo(enem);
+        new Thread(new Disparo(nave ,disparo, this, e)).start();
     }
 
 
