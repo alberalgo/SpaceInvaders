@@ -55,10 +55,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/navebig2"
-        android:layout_marginRight="100dp"
-        android:layout_marginBottom="27dp"
         android:layout_above="@+id/buttonDerecha"
         android:layout_alignStart="@+id/disp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/navemed"
+        android:id="@+id/enemy"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible" />
 
 
 </RelativeLayout>
