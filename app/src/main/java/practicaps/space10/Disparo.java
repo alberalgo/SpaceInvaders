@@ -1,8 +1,13 @@
 package practicaps.space10;
 
+import android.content.Context;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.media.AudioAttributes;
+import android.provider.MediaStore;
+import android.media.SoundPool;
+import android.media.AudioManager;
 
 /**
  * Created by Marco on 21/10/2016.
@@ -12,14 +17,17 @@ public class Disparo implements Runnable {
 
     private ImageView nave;
     private ImageView disparo;
-    public float coordenadaX = 0;
-    private TextView tou;
     private float coordenadaDisparo;
+    public Context cont;
+    public Enemigo e;
 
-    public Disparo(ImageView nave, ImageView disparo) {
 
+
+    public Disparo(ImageView nave, ImageView disparo, Context c, Enemigo enem) {
         this.nave = nave;
         this.disparo = disparo;
+        this.cont=c;
+        this.e=enem;
     }
 
     @Override
@@ -36,6 +44,7 @@ public class Disparo implements Runnable {
 
     public void Disparo(ImageView nave, ImageView disparo) {
         Log.d("Disparo: ", "Se ha producido un disparo");
+        new Musica(cont).reproducir();
 
         coordenadaDisparo = nave.getY();
 
@@ -50,7 +59,7 @@ public class Disparo implements Runnable {
                 e.printStackTrace();
             }
             coordenadaDisparo = coordenadaDisparo - val;
-            Log.d("PUM: ", String.valueOf(val));
+            Log.d("PUM: ", String.valueOf(coordenadaDisparo));
             disparo.setY(coordenadaDisparo - val * 20);
         }
     }

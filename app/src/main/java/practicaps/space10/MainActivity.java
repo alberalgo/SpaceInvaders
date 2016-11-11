@@ -9,17 +9,21 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.media.MediaPlayer;
+import android.content.Context;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
 
     //declaro variables para los componentes
 
     private ImageView nave;
+    private ImageView enem;
     private ImageView disparo;
-    public float coordenadaX = 0;
     private TextView tou;
-    private float coordenadaDisparo = 1;
+    public Point size;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,37 +35,35 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         nave = (ImageView) findViewById(R.id.nave_id);
         tou = (TextView) findViewById(R.id.touch);
         disparo = (ImageView) findViewById(R.id.disp);
+        enem = (ImageView) findViewById(R.id.enemy);
         tou.setOnTouchListener(this);
+
 
 
         // Coge el objeto display para entrar a los datos de la pantalla
         Display display = getWindowManager().getDefaultDisplay();
         // Carga la resolución con un objeto Point
-        Point size = new Point();
+        size = new Point();
         display.getSize(size);
         //Ahora podemos usar size.x | size.y para obtener el ancho y alto de la pantalla del dispositivo
 
+        Log.d("Ancho del disp", String.valueOf(size.x));
+        Log.d("Alto del disp", String.valueOf(size.y));
 
+
+        //coloco la nave enemiga en el centro del eje X
+        //enem.setX(size.x/2);
+        /*
+        //coloco la nave enemiga en la parte superior del eje Y
+        enem.setY(size.y/2);
+        */
+
+        new Musica(this).reproducir();
+        new Musica(this).reproducir2();
 
         //ejecuto el hilo
-        new Thread(new Disparo(nave ,disparo)).start();
-
-    }
-
-    public void derecha(View view) {
-        coordenadaX = nave.getX();
-        Log.d("Posicion: ", String.valueOf(coordenadaX));
-        if (coordenadaX < 968) {
-            nave.setX(nave.getX() + 100);
-        }
-    }
-
-    public void izquierda(View view) {
-        coordenadaX = nave.getX();
-        Log.d("Posicion", String.valueOf(coordenadaX));
-        if (coordenadaX > 0) {
-            nave.setX(nave.getX() - 100);
-        }
+        Enemigo e = new Enemigo(enem);
+        new Thread(new Disparo(nave ,disparo, this, e)).start();
     }
 
 
@@ -75,31 +77,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         switch (action) {
             case (MotionEvent.ACTION_DOWN):
 
-
-                /* Comentado, codigo para mover la nave mediante pulsacion en pantalla
-                disparo.setVisibility(View.VISIBLE);
-                disparo.setX(coorX);
-                coordenadaDisparo = 964;
-                for(int i=0; i<100; i++){
-                    coordenadaDisparo = coordenadaDisparo - 5;
-
-                    disparo.setY(coordenadaDisparo);
-                    //SystemClock.sleep(10);
-                    Log.d("PosicionDisparoX: ", String.valueOf(coorX));
-                    Log.d("PosicionDisparoY: ", String.valueOf(coordenadaDisparo));
-                }
-
-                if ( coorX > 300) {
-
-                    nave.setX(nave.getX() + 100);
-                    return true;
-                }
-                if ( coorX < 300) {
-
-                    nave.setX(nave.getX() - 100);
-                    return true;
-                }
-                */
 
             case (MotionEvent.ACTION_MOVE):
                 //Desplaza la nave siguiendo la pulsacion
