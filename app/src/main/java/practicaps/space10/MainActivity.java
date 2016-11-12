@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private ImageView disparo;
     private ImageView navebonus;
     private TextView tou;
-    private int puntuacion;
     private Colisiones cs = new Colisiones();
     public Point size;
 
@@ -36,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         getSupportActionBar().hide();
 
         //relaciono la variable nave con el objeto nave por su id, y así con el resto
-        puntuacion = 0;
         nave = (ImageView) findViewById(R.id.nave_id);
         tou = (TextView) findViewById(R.id.touch);
         disparo = (ImageView) findViewById(R.id.disp);
@@ -111,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         }
 
         public boolean chocar(ImageView obj, ImageView disp){
-            if((obj.getX()-40<=disp.getX())&&(obj.getX()+40>=disp.getX())&&(obj.getY()-40<=disp.getY())&&(obj.getY()+40>=disp.getY())){
+            if((obj.getX()-40<=disp.getX())&&(obj.getX()+40>=disp.getX())&&(obj.getY()-40<=disp.getY())&&(obj.getY()+40>=disp.getY())&&(disp.getX()!=0)){
                 return true;
             }
             return false;
