@@ -21,15 +21,12 @@ public class naveB implements Runnable {
     public void run() {
         while (true) {
             try{
-                int numeroAleatorio = 1;
-                if(numeroAleatorio == 1) {
-                    naveBon.setVisibility(View.VISIBLE);
-                    while(naveBon.getX()>-60) {
-                        naveBon.setX(naveBon.getX() - 1);
-                        Thread.sleep(30);
-                    }
-                    naveBon.setX(inicialX);
+                naveBon.setVisibility(View.VISIBLE);
+                while(naveBon.getX()>-60) {
+                    naveBon.setX(naveBon.getX() - 1);
+                    Thread.sleep(30);
                 }
+                naveBon.setX(inicialX);
                 //30 SEGUNDOS ENTRE CADA NAVE BONUS DESDE QUE DESAPARECE
                 Thread.sleep(30000);
             }
