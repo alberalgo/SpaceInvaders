@@ -67,5 +67,13 @@
         android:layout_alignParentEnd="true"
         android:visibility="invisible" />
 
+    <ImageView
+        app:srcCompat="@drawable/alienspaceship"
+        android:id="@+id/naveBonus"
+        android:layout_width="120px"
+        android:layout_height="120px"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
 
 </RelativeLayout>

@@ -43,13 +43,11 @@ public class Disparo implements Runnable {
     }
 
     public void Disparo(ImageView nave, ImageView disparo) {
-        Log.d("Disparo: ", "Se ha producido un disparo");
         new Musica(cont).reproducir();
 
         coordenadaDisparo = nave.getY();
 
         disparo.setX(nave.getX());
-        Log.d("Coordenada disparo: ", String.valueOf(coordenadaDisparo));
 
         for (int i = 0; i < 50; i++) {
             int val = i;
@@ -59,7 +57,6 @@ public class Disparo implements Runnable {
                 e.printStackTrace();
             }
             coordenadaDisparo = coordenadaDisparo - val;
-            Log.d("PUM: ", String.valueOf(coordenadaDisparo));
             disparo.setY(coordenadaDisparo - val * 20);
         }
     }

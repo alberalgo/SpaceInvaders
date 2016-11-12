@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         //ejecuto el hilo
         Enemigo e = new Enemigo(enem);
+        new Thread(new naveB((ImageView) findViewById(R.id.naveBonus),size.x)).start();
         new Thread(new Disparo(nave ,disparo, this, e)).start();
     }
 
