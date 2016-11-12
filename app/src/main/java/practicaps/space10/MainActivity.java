@@ -1,6 +1,7 @@
 package practicaps.space10;
 
 import android.graphics.Point;
+import android.media.Image;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,7 +23,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private ImageView nave;
     private ImageView enem;
     private ImageView disparo;
+    private ImageView navebonus;
     private TextView tou;
+    private int puntuacion;
+    private Colisiones cs = new Colisiones();
     public Point size;
 
     @Override
@@ -32,10 +36,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         getSupportActionBar().hide();
 
         //relaciono la variable nave con el objeto nave por su id, y así con el resto
+        puntuacion = 0;
         nave = (ImageView) findViewById(R.id.nave_id);
         tou = (TextView) findViewById(R.id.touch);
         disparo = (ImageView) findViewById(R.id.disp);
         enem = (ImageView) findViewById(R.id.enemy);
+        navebonus = (ImageView) findViewById(R.id.naveBonus);
         tou.setOnTouchListener(this);
 
 
@@ -63,8 +69,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         //ejecuto el hilo
         Enemigo e = new Enemigo(enem);
-        new Thread(new naveB((ImageView) findViewById(R.id.naveBonus),size.x)).start();
-        new Thread(new Disparo(nave ,disparo, this, e)).start();
+        new Thread(new naveB(navebonus,size.x)).start();
+        new Thread(new Disparo(nave ,disparo, this, e, size.y)).start();
+        cs.start();
     }
 
 
@@ -82,8 +89,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             case (MotionEvent.ACTION_MOVE):
                 //Desplaza la nave siguiendo la pulsacion
 
-                Log.d("Posicion: ", String.valueOf(coorX));
-                Log.d("Posicion: ", String.valueOf(coorY));
                 nave.setX(coorX);
                 nave.setY(coorY - 100);
                 if (coorY < 800) {
@@ -93,5 +98,23 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 return true;
         }
         return false;
+    }
+
+    class Colisiones extends Thread{
+        @Override
+        public void run(){
+            while(true){
+                if(chocar(navebonus,disparo)){
+                    navebonus.setX(navebonus.getX()-size.x*2);
+                }
+            }
+        }
+
+        public boolean chocar(ImageView obj, ImageView disp){
+            if((obj.getX()-40<=disp.getX())&&(obj.getX()+40>=disp.getX())&&(obj.getY()-40<=disp.getY())&&(obj.getY()+40>=disp.getY())){
+                return true;
+            }
+            return false;
+        }
     }
 }

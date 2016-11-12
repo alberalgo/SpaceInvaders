@@ -20,14 +20,16 @@ public class Disparo implements Runnable {
     private float coordenadaDisparo;
     public Context cont;
     public Enemigo e;
+    private int inicialY;
 
 
 
-    public Disparo(ImageView nave, ImageView disparo, Context c, Enemigo enem) {
+    public Disparo(ImageView nave, ImageView disparo, Context c, Enemigo enem, int sizeY) {
         this.nave = nave;
         this.disparo = disparo;
         this.cont=c;
         this.e=enem;
+        inicialY = sizeY;
     }
 
     @Override
@@ -45,19 +47,14 @@ public class Disparo implements Runnable {
     public void Disparo(ImageView nave, ImageView disparo) {
         new Musica(cont).reproducir();
 
-        coordenadaDisparo = nave.getY();
-
         disparo.setX(nave.getX());
-
-        for (int i = 0; i < 50; i++) {
-            int val = i;
-            try {
-                Thread.sleep(30);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        disparo.setY(nave.getY());
+        while(disparo.getY()>-70){
+            try{
+                disparo.setY(disparo.getY()-1);
+                Thread.sleep(1);
             }
-            coordenadaDisparo = coordenadaDisparo - val;
-            disparo.setY(coordenadaDisparo - val * 20);
+            catch (InterruptedException e) {e.printStackTrace();}
         }
     }
 }
