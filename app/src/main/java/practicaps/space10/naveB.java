@@ -29,7 +29,7 @@ public class naveB implements Runnable {
                 //30 SEGUNDOS ENTRE CADA NAVE BONUS DESDE QUE DESAPARECE
                 Thread.sleep(30000);
             }
-            catch (InterruptedException e) {e.printStackTrace();}
+            catch (Exception e) {e.printStackTrace();}
         }
     }
 }

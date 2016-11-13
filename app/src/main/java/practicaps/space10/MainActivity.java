@@ -27,7 +27,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private Colisiones cs = new Colisiones();
     private int enemigosVivos;
     public Point size;
-    private Musica musica;
+    public TextView punt;
+    private int puntuacion;
 
     //Enemigos
     private ImageView enemigo1;
@@ -57,7 +58,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         enemigosVivos = 3;
         ast1 = (ImageView) findViewById(R.id.asteroide1);
         ast2 = (ImageView) findViewById(R.id.asteroide2);
-        musica = new Musica(this);
+        punt = (TextView) findViewById(R.id.puntuacion);
+        punt.setText("0");
+        puntuacion = 0;
+
 
 
 
@@ -84,10 +88,20 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         new Musica(this).reproducir2();
 
         //ejecuto el hilo
-        new Thread(new naveB(navebonus,size.x)).start();
-        new Thread(new Disparo(nave ,disparo, this, size.y)).start();
-        new Thread(new Enemigo(enemigo1,enemigo2,enemigo3, size.x)).start();
+        naveB nv = new naveB(navebonus,size.x);
+        Disparo dis = new Disparo(nave ,disparo, this, size.y);
+        Enemigo enem = new Enemigo(enemigo1,enemigo2,enemigo3, size.x);
+        new Thread(nv).start();
+        new Thread(dis).start();
+        new Thread(enem).start();
         cs.start();
+    }
+
+    @Override
+    public void onBackPressed() {
+        try{System.exit(1);}
+        catch(Exception e){}
+
     }
 
 
@@ -118,27 +132,47 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 if(chocar(navebonus,disparo)){
                     navebonus.setX(navebonus.getX()-size.x*2);
                     disparo.setY(-(size.y*2));
-                    musica.reproducir3();
+                    try{
+                        puntuacion += 5;
+                        punt.setText(String.valueOf(puntuacion));
+                    }
+                    catch(Exception e){}
+                    Log.d("NAVE BONUS DESTRUIDA", "");
                 }
                 if(chocar(enemigo1,disparo)){
                     enemigo1.setX(enemigo1.getX()-2*size.x);
                     disparo.setY(-(size.y*2));
                     enemigosVivos -= 1;
-                    musica.reproducir3();
+                    try{
+                        puntuacion += 1;
+                        punt.setText(String.valueOf(puntuacion));
+                    }
+                    catch(Exception e){}
+                    Log.d("NAVE 1", "");
                 }
                 if(chocar(enemigo2,disparo)){
                     enemigo2.setX(enemigo2.getX()-2*size.x);
                     disparo.setY(-(size.y*2));
                     enemigosVivos -= 1;
-                    musica.reproducir3();
+                    try{
+                        puntuacion += 1;
+                        punt.setText(String.valueOf(puntuacion));
+                    }
+                    catch(Exception e){}
+                    Log.d("NAVE 2", "");
                 }
                 if(chocar(enemigo3,disparo)){
                     enemigo3.setX(enemigo3.getX()-2*size.x);
                     disparo.setY(-(size.y*2));
                     enemigosVivos -= 1;
-                    musica.reproducir3();
+                    try{
+                        puntuacion += 1;
+                        punt.setText(String.valueOf(puntuacion));
+                    }
+                    catch(Exception e){}
+                    Log.d("NAVE 3", "");
                 }
-                if(enemigosVivos==0){
+                if((enemigosVivos==0)||(enemigo1.getY()>=size.y)){
                     enemigosVivos = 3;
                     enemigo1.setX(150);
                     enemigo2.setX(350);
@@ -146,9 +180,11 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     enemigo1.setY(200);
                     enemigo2.setY(200);
                     enemigo3.setY(200);
+                    Log.d("NAVES RESTABLECIDAS", "");
                 }
                 if(chocar(ast1,disparo)||(chocar(ast2,disparo))){
                     disparo.setY(-(size.y*2));
+                    Log.d("ASTEROIDE ALCANZADO", "");
                 }
             }
         }

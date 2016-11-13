@@ -52,7 +52,7 @@ public class Disparo implements Runnable {
                 disparo.setY(disparo.getY()-1);
                 Thread.sleep(1);
             }
-            catch (InterruptedException e) {e.printStackTrace();}
+            catch (Exception e) {e.printStackTrace();}
         }
     }
 }
