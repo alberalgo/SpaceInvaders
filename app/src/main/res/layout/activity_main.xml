@@ -43,23 +43,6 @@
         android:visibility="invisible" />
 
     <ImageView
-        android:id="@+id/disp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ray"
-        android:layout_marginBottom="34dp"
-        android:layout_alignBottom="@+id/nave_id"
-        android:layout_centerHorizontal="true" />
-
-    <ImageView
-        android:id="@+id/nave_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/navebig2"
-        android:layout_above="@+id/buttonDerecha"
-        android:layout_alignStart="@+id/disp" />
-
-    <ImageView
         app:srcCompat="@drawable/alienspaceship"
         android:id="@+id/naveBonus"
         android:layout_width="120px"
@@ -93,6 +76,40 @@
         android:layout_alignTop="@+id/ovni01"
         android:layout_toEndOf="@+id/nave_id"
         android:layout_marginStart="10dp" />
+
+    <ImageView
+        android:id="@+id/nave_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/navebig2"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp" />
+
+    <ImageView
+        android:id="@+id/disp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ray"
+        android:layout_alignTop="@+id/nave_id"
+        android:layout_alignStart="@+id/nave_id" />
+
+    <ImageView
+        app:srcCompat="@drawable/asteroide"
+        android:layout_marginBottom="21dp"
+        android:id="@+id/asteroide1"
+        android:layout_width="80px"
+        android:layout_height="80px"
+        android:layout_above="@+id/nave_id"
+        android:layout_alignStart="@+id/ovni00" />
+
+    <ImageView
+        android:layout_width="80px"
+        android:layout_height="80px"
+        app:srcCompat="@drawable/asteroide"
+        android:layout_alignBottom="@+id/asteroide1"
+        android:layout_alignEnd="@+id/ovni02"
+        android:id="@+id/asteroide2" />
 
 
 </RelativeLayout>

@@ -13,18 +13,17 @@ public class naveB implements Runnable {
 
     public naveB(ImageView nave, int sizeX) {
         naveBon = nave;
-        naveBon.setVisibility(View.INVISIBLE);
         inicialX = sizeX;
+        naveBon.setX(naveBon.getX()+300);
     }
 
     @Override
     public void run() {
         while (true) {
             try{
-                naveBon.setVisibility(View.VISIBLE);
                 while(naveBon.getX()>-60) {
                     naveBon.setX(naveBon.getX() - 1);
-                    Thread.sleep(30);
+                    Thread.sleep(15);
                 }
                 naveBon.setX(inicialX);
                 //30 SEGUNDOS ENTRE CADA NAVE BONUS DESDE QUE DESAPARECE
