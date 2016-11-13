@@ -8,11 +8,11 @@ import android.widget.ImageView;
  */
 
 public class Enemigo {
-    public ImageView enem;
-    public ImageView nave;
-    public float coorX;
-    public float coorY;
-    public float coorYnave;
+    private ImageView enem;
+    private ImageView nave;
+    private float coorX;
+    private float coorY;
+    private float coorYnave;
 
     public Enemigo(ImageView enem) {
         this.enem=enem;

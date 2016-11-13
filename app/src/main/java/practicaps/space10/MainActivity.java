@@ -23,7 +23,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private ImageView enem;
     private ImageView disparo;
     private TextView tou;
+    private TextView textoPuntuaciones;
     public Point size;
+    private Puntuacion punt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +38,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         tou = (TextView) findViewById(R.id.touch);
         disparo = (ImageView) findViewById(R.id.disp);
         enem = (ImageView) findViewById(R.id.enemy);
+        textoPuntuaciones = (TextView) findViewById(R.id.puntuacion);
         tou.setOnTouchListener(this);
-
 
 
         // Coge el objeto display para entrar a los datos de la pantalla
@@ -63,8 +65,11 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         //ejecuto el hilo
         Enemigo e = new Enemigo(enem);
-        new Thread(new Disparo(nave ,disparo, this, e)).start();
+        new Thread(new Disparo(nave, disparo, this, e)).start();
+        this.punt = new Puntuacion();
+
     }
+
 
 
     @Override

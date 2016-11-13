@@ -67,5 +67,14 @@
         android:layout_alignParentEnd="true"
         android:visibility="invisible" />
 
+    <TextView
+        android:text="00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/disp"
+        android:id="@+id/puntuacion"
+        android:layout_alignStart="@+id/disp"
+        android:layout_alignBottom="@+id/enemy" />
+
 
 </RelativeLayout>
