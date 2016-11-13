@@ -19,8 +19,7 @@
         android:layout_alignParentBottom="true"
         android:textAlignment="center"
         android:textColor="@android:color/background_light"
-        android:textSize="24sp"
-        android:layout_below="@+id/ovni10" />
+        android:textSize="24sp" />
 
     <Button
         android:id="@+id/buttonDerecha"
@@ -110,6 +109,16 @@
         android:layout_alignBottom="@+id/asteroide1"
         android:layout_alignEnd="@+id/ovni02"
         android:id="@+id/asteroide2" />
+
+    <TextView
+        android:text="-"
+        android:textColor="#ff0000"
+        android:textSize="80px"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/boton"
+        android:layout_toStartOf="@+id/asteroide1"
+        android:id="@+id/puntuacion"
+        android:layout_width="200px" />
 
 
 </RelativeLayout>
