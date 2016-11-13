@@ -26,7 +26,13 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private ImageView navebonus;
     private TextView tou;
     private Colisiones cs = new Colisiones();
+    private int enemigosVivos;
     public Point size;
+
+    //Enemigos
+    private ImageView enemigo1;
+    private ImageView enemigo2;
+    private ImageView enemigo3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +44,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         nave = (ImageView) findViewById(R.id.nave_id);
         tou = (TextView) findViewById(R.id.touch);
         disparo = (ImageView) findViewById(R.id.disp);
-        enem = (ImageView) findViewById(R.id.enemy);
         navebonus = (ImageView) findViewById(R.id.naveBonus);
         tou.setOnTouchListener(this);
+        enemigo1 = (ImageView) findViewById(R.id.ovni00);
+        enemigo2 = (ImageView) findViewById(R.id.ovni01);
+        enemigo3 = (ImageView) findViewById(R.id.ovni02);
+        enemigosVivos = 3;
 
 
 
@@ -66,9 +75,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         new Musica(this).reproducir2();
 
         //ejecuto el hilo
-        Enemigo e = new Enemigo(enem);
         new Thread(new naveB(navebonus,size.x)).start();
-        new Thread(new Disparo(nave ,disparo, this, e, size.y)).start();
+        new Thread(new Disparo(nave ,disparo, this, size.y)).start();
+        new Thread(new Enemigo(enemigo1,enemigo2,enemigo3, size.x)).start();
         cs.start();
     }
 
@@ -88,11 +97,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 //Desplaza la nave siguiendo la pulsacion
 
                 nave.setX(coorX);
-                nave.setY(coorY - 100);
-                if (coorY < 800) {
-                    Log.d("Posicion: ", "Tocaste el limite");
-                    nave.setY(700);
-                }
                 return true;
         }
         return false;
@@ -104,6 +108,31 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             while(true){
                 if(chocar(navebonus,disparo)){
                     navebonus.setX(navebonus.getX()-size.x*2);
+                    disparo.setY(-(size.y*2));
+                }
+                if(chocar(enemigo1,disparo)){
+                    enemigo1.setX(enemigo1.getX()-2*size.x);
+                    disparo.setY(-(size.y*2));
+                    enemigosVivos -= 1;
+                }
+                if(chocar(enemigo2,disparo)){
+                    enemigo2.setX(enemigo2.getX()-2*size.x);
+                    disparo.setY(-(size.y*2));
+                    enemigosVivos -= 1;
+                }
+                if(chocar(enemigo3,disparo)){
+                    enemigo3.setX(enemigo3.getX()-2*size.x);
+                    disparo.setY(-(size.y*2));
+                    enemigosVivos -= 1;
+                }
+                if(enemigosVivos==0){
+                    enemigosVivos = 3;
+                    enemigo1.setX(150);
+                    enemigo2.setX(350);
+                    enemigo3.setX(550);
+                    enemigo1.setY(200);
+                    enemigo2.setY(200);
+                    enemigo3.setY(200);
                 }
             }
         }

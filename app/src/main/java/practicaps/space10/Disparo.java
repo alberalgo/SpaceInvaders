@@ -19,16 +19,14 @@ public class Disparo implements Runnable {
     private ImageView disparo;
     private float coordenadaDisparo;
     public Context cont;
-    public Enemigo e;
     private int inicialY;
 
 
 
-    public Disparo(ImageView nave, ImageView disparo, Context c, Enemigo enem, int sizeY) {
+    public Disparo(ImageView nave, ImageView disparo, Context c, int sizeY) {
         this.nave = nave;
         this.disparo = disparo;
         this.cont=c;
-        this.e=enem;
         inicialY = sizeY;
     }
 
