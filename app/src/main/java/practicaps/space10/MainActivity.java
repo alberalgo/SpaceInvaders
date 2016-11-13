@@ -24,11 +24,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private ImageView disparo;
     private ImageView navebonus;
     private TextView tou;
-<<<<<<< HEAD
-    private TextView textoPuntuaciones;
-    public Point size;
+
     private Puntuacion punt;
-=======
+
     private Colisiones cs = new Colisiones();
     private int enemigosVivos;
     public Point size;
@@ -43,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private ImageView ast1;
     private ImageView ast2;
 
->>>>>>> refs/remotes/origin/master
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,12 +53,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         nave = (ImageView) findViewById(R.id.nave_id);
         tou = (TextView) findViewById(R.id.touch);
         disparo = (ImageView) findViewById(R.id.disp);
-<<<<<<< HEAD
-        enem = (ImageView) findViewById(R.id.enemy);
-        textoPuntuaciones = (TextView) findViewById(R.id.puntuacion);
-=======
+
         navebonus = (ImageView) findViewById(R.id.naveBonus);
->>>>>>> refs/remotes/origin/master
+
         tou.setOnTouchListener(this);
         enemigo1 = (ImageView) findViewById(R.id.ovni00);
         enemigo2 = (ImageView) findViewById(R.id.ovni01);
@@ -94,17 +89,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         new Musica(this).reproducir2();
 
         //ejecuto el hilo
-<<<<<<< HEAD
-        Enemigo e = new Enemigo(enem);
-        new Thread(new Disparo(nave, disparo, this, e)).start();
-        this.punt = new Puntuacion();
 
-=======
         new Thread(new naveB(navebonus,size.x)).start();
         new Thread(new Disparo(nave ,disparo, this, size.y)).start();
         new Thread(new Enemigo(enemigo1,enemigo2,enemigo3, size.x)).start();
         cs.start();
->>>>>>> refs/remotes/origin/master
+
     }
 
 
