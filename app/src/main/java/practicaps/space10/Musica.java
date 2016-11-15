@@ -38,7 +38,7 @@ public class Musica {
 
     public void reproducir3(){
         m = MediaPlayer.create(context, R.raw.impacto);
-        m.setLooping(true);
+        m.setLooping(false);
         //m.setVolume(100,100);
         m.start();
     }

@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     public Point size;
     public TextView punt;
     private int puntuacion;
+    private Context context;
 
     //Enemigos
     private ImageView enemigo1;
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         getSupportActionBar().hide();
 
         //relaciono la variable nave con el objeto nave por su id, y así con el resto
+        context = this;
         nave = (ImageView) findViewById(R.id.nave_id);
         tou = (TextView) findViewById(R.id.touch);
         disparo = (ImageView) findViewById(R.id.disp);
@@ -110,7 +112,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         int action = MotionEventCompat.getActionMasked(event);
         float coorX = event.getX();
-        int coorY = (int) event.getY();
 
         switch (action) {
             case (MotionEvent.ACTION_DOWN):
@@ -118,9 +119,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
             case (MotionEvent.ACTION_MOVE):
                 //Desplaza la nave siguiendo la pulsacion
-
-                nave.setX(coorX);
-                return true;
+                if((nave.getX()-75<=coorX)&&(nave.getX()+75>=coorX)) {
+                    nave.setX(coorX);
+                    return true;
+                }
         }
         return false;
     }
@@ -138,6 +140,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     }
                     catch(Exception e){}
                     Log.d("NAVE BONUS DESTRUIDA", "");
+                    new Musica(context).reproducir3();
                 }
                 if(chocar(enemigo1,disparo)){
                     enemigo1.setX(enemigo1.getX()-2*size.x);
@@ -149,6 +152,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     }
                     catch(Exception e){}
                     Log.d("NAVE 1", "");
+                    new Musica(context).reproducir3();
+
                 }
                 if(chocar(enemigo2,disparo)){
                     enemigo2.setX(enemigo2.getX()-2*size.x);
@@ -160,6 +165,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     }
                     catch(Exception e){}
                     Log.d("NAVE 2", "");
+                    new Musica(context).reproducir3();
                 }
                 if(chocar(enemigo3,disparo)){
                     enemigo3.setX(enemigo3.getX()-2*size.x);
@@ -170,6 +176,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                         punt.setText(String.valueOf(puntuacion));
                     }
                     catch(Exception e){}
+                    new Musica(context).reproducir3();
                     Log.d("NAVE 3", "");
                 }
                 if((enemigosVivos==0)||(enemigo1.getY()>=size.y)){
