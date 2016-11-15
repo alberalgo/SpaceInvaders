@@ -140,6 +140,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     }
                     catch(Exception e){}
                     Log.d("NAVE BONUS DESTRUIDA", "");
+                    new Musica(context).reproducir3();
                 }
                 if(chocar(enemigo1,disparo)){
                     enemigo1.setX(enemigo1.getX()-2*size.x);
