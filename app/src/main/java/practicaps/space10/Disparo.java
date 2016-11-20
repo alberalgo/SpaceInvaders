@@ -2,6 +2,7 @@ package practicaps.space10;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.media.AudioAttributes;
@@ -28,10 +29,14 @@ public class Disparo implements Runnable {
         this.disparo = disparo;
         this.cont=c;
         inicialY = sizeY;
+        disparo.setY(-inicialY);
+        disparo.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void run() {
+        try{Thread.sleep(1000);}
+        catch(Exception e){};
         while (true) {
             try {
                 Thread.sleep(500);

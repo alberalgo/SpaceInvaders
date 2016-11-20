@@ -89,6 +89,7 @@
         android:id="@+id/disp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="invisible"
         android:background="@drawable/ray"
         android:layout_alignTop="@+id/nave_id"
         android:layout_alignStart="@+id/nave_id" />
@@ -119,6 +120,33 @@
         android:layout_toStartOf="@+id/asteroide1"
         android:id="@+id/puntuacion"
         android:layout_width="200px" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/ray"
+        android:layout_below="@+id/naveBonus"
+        android:layout_alignStart="@+id/buttonDerecha"
+        android:id="@+id/disparoEnemigo3" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/ray"
+        android:layout_alignTop="@+id/disparoEnemigo3"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/disparoEnemigo2" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/ray"
+        android:layout_alignTop="@+id/disparoEnemigo2"
+        android:layout_alignEnd="@+id/boton"
+        android:id="@+id/disparoEnemigo1" />
 
 
 </RelativeLayout>

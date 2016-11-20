@@ -40,6 +40,11 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private ImageView ast1;
     private ImageView ast2;
 
+    //Disparo enemigo
+    private ImageView dispEnemigo3;
+    private ImageView dispEnemigo2;
+    private ImageView dispEnemigo1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +68,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         punt = (TextView) findViewById(R.id.puntuacion);
         punt.setText("0");
         puntuacion = 0;
+        dispEnemigo3 = (ImageView) findViewById(R.id.disparoEnemigo3);
+        dispEnemigo2 = (ImageView) findViewById(R.id.disparoEnemigo2);
+        dispEnemigo1 = (ImageView) findViewById(R.id.disparoEnemigo1);
 
 
 
@@ -96,6 +104,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         new Thread(nv).start();
         new Thread(dis).start();
         new Thread(enem).start();
+        new Thread(new DisparoEnemigo(enemigo3, dispEnemigo3, nave, size.y)).start();
+        new Thread(new DisparoEnemigo(enemigo2, dispEnemigo2, nave, size.y)).start();
+        new Thread(new DisparoEnemigo(enemigo1, dispEnemigo1, nave, size.y)).start();
         cs.start();
     }
 
