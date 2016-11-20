@@ -148,5 +148,29 @@
         android:layout_alignEnd="@+id/boton"
         android:id="@+id/disparoEnemigo1" />
 
+    <ImageView
+        android:layout_width="40px"
+        android:layout_height="40px"
+        app:srcCompat="@drawable/darth"
+        android:id="@+id/vida1"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="40px"
+        android:layout_height="40px"
+        app:srcCompat="@drawable/darth"
+        android:id="@+id/vida2"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/vida1" />
+
+    <ImageView
+        android:layout_width="40px"
+        android:layout_height="40px"
+        app:srcCompat="@drawable/darth"
+        android:id="@+id/vida3"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/vida2" />
+
 
 </RelativeLayout>
