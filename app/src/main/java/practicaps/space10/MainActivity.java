@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     public TextView punt;
     private int puntuacion;
     private Context context;
+    private RelativeLayout layoutprincipal;
 
     //Enemigos
     private ImageView enemigo1;
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         getSupportActionBar().hide();
 
         //relaciono la variable nave con el objeto nave por su id, y así con el resto
+        layoutprincipal = (RelativeLayout) findViewById(R.id.activity_main);
         context = this;
         nave = (ImageView) findViewById(R.id.nave_id);
         tou = (TextView) findViewById(R.id.touch);
@@ -154,6 +156,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         @Override
         public void run(){
             while(true){
+                if(vidas==0){
+                    //PERDER
+                }
                 if(chocar(navebonus,disparo)){
                     navebonus.setX(navebonus.getX()-size.x*2);
                     disparo.setY(-(size.y*2));
@@ -224,7 +229,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     dispEnemigo3.setY(size.y*2);
                 }
 
-                if(enemigo1.getY()>=ast1.getY()){
+                if((enemigo1.getY()>=ast1.getY())&&(ast1.getY()!=0)){
                     quitarVida();
                     reestablecerNaves();
                 }
