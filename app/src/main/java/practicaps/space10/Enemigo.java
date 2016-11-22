@@ -51,7 +51,7 @@ public class Enemigo implements Runnable{
                 }
                 Thread.sleep(4);
             }
-            catch (InterruptedException e) {e.printStackTrace();}
+            catch (Exception e) {e.printStackTrace();}
         }
     }
 }
