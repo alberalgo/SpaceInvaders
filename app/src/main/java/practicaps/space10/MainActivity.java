@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     public TextView punt;
     private int puntuacion;
     private Context context;
+    private RelativeLayout layoutprincipal;
 
     //Enemigos
     private ImageView enemigo1;
@@ -45,6 +46,13 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private ImageView dispEnemigo2;
     private ImageView dispEnemigo1;
 
+    //vidas
+    private ImageView vida1;
+    private ImageView vida2;
+    private ImageView vida3;
+    private int vidas;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         getSupportActionBar().hide();
 
         //relaciono la variable nave con el objeto nave por su id, y así con el resto
+        layoutprincipal = (RelativeLayout) findViewById(R.id.activity_main);
         context = this;
         nave = (ImageView) findViewById(R.id.nave_id);
         tou = (TextView) findViewById(R.id.touch);
@@ -71,6 +80,11 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         dispEnemigo3 = (ImageView) findViewById(R.id.disparoEnemigo3);
         dispEnemigo2 = (ImageView) findViewById(R.id.disparoEnemigo2);
         dispEnemigo1 = (ImageView) findViewById(R.id.disparoEnemigo1);
+        vida1 = (ImageView) findViewById(R.id.vida1);
+        vida2 = (ImageView) findViewById(R.id.vida2);
+        vida3 = (ImageView) findViewById(R.id.vida3);
+        vidas = 3;
+
 
 
 
@@ -142,6 +156,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         @Override
         public void run(){
             while(true){
+                if(vidas==0){
+                    //PERDER
+                }
                 if(chocar(navebonus,disparo)){
                     navebonus.setX(navebonus.getX()-size.x*2);
                     disparo.setY(-(size.y*2));
@@ -190,15 +207,34 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     new Musica(context).reproducir3();
                     Log.d("NAVE 3", "");
                 }
-                if((enemigosVivos==0)||(enemigo1.getY()>=size.y)){
-                    enemigosVivos = 3;
-                    enemigo1.setX(150);
-                    enemigo2.setX(350);
-                    enemigo3.setX(550);
-                    enemigo1.setY(200);
-                    enemigo2.setY(200);
-                    enemigo3.setY(200);
-                    Log.d("NAVES RESTABLECIDAS", "");
+                if(chocar(nave, dispEnemigo1)){
+                    quitarVida();
+                    dispEnemigo1.setY(size.y*2);
+                }
+                if(chocar(nave, dispEnemigo2)){
+                    quitarVida();
+                    dispEnemigo2.setY(size.y*2);
+                }
+                if(chocar(nave, dispEnemigo3)){
+                    quitarVida();
+                    dispEnemigo3.setY(size.y*2);
+                }
+                if((chocar(ast1, dispEnemigo1))||(chocar(ast2,dispEnemigo1))){
+                    dispEnemigo1.setY(size.y*2);
+                }
+                if((chocar(ast1, dispEnemigo2))||(chocar(ast2,dispEnemigo2))){
+                    dispEnemigo2.setY(size.y*2);
+                }
+                if((chocar(ast1, dispEnemigo3))||(chocar(ast2,dispEnemigo3))){
+                    dispEnemigo3.setY(size.y*2);
+                }
+
+                if((enemigo1.getY()>=ast1.getY())&&(ast1.getY()!=0)){
+                    quitarVida();
+                    reestablecerNaves();
+                }
+                if(enemigosVivos==0){
+                    reestablecerNaves();
                 }
                 if(chocar(ast1,disparo)||(chocar(ast2,disparo))){
                     disparo.setY(-(size.y*2));
@@ -212,6 +248,35 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 return true;
             }
             return false;
+        }
+
+        public void reestablecerNaves(){
+            enemigosVivos = 3;
+            enemigo1.setX(150);
+            enemigo2.setX(350);
+            enemigo3.setX(550);
+            enemigo1.setY(200);
+            enemigo2.setY(200);
+            enemigo3.setY(200);
+        }
+
+        public void quitarVida(){
+            vidas -= 1;
+            try {
+                if (vida3.getVisibility() == View.VISIBLE) {
+                    vida3.setVisibility(View.INVISIBLE);
+                    return;
+                }
+                if (vida2.getVisibility() == View.VISIBLE) {
+                    vida2.setVisibility(View.INVISIBLE);
+                    return;
+                }
+                if (vida1.getVisibility() == View.VISIBLE) {
+                    vida1.setVisibility(View.INVISIBLE);
+                    return;
+                }
+            }
+            catch(Exception e){}
         }
     }
 }
