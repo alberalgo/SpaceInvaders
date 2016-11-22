@@ -2,8 +2,6 @@ package practicaps.space10;
 
 import android.graphics.Point;
 import android.media.Image;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,6 +24,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private ImageView disparo;
     private ImageView navebonus;
     private TextView tou;
+    private Colisiones cs = new Colisiones();
+    private int enemigosVivos;
+    public Point size;
+    public TextView punt;
+    private int puntuacion;
+
     //Enemigos
     private ImageView enemigo1;
     private ImageView enemigo2;
@@ -34,13 +38,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     //Asteroides
     private ImageView ast1;
     private ImageView ast2;
-
-    //Puntuacion
-    private TextView puntuacionTxt;
-    private Colisiones cs = new Colisiones();
-    private int enemigosVivos;
-    public Point size;
-    private Musica musica;
 
 
     @Override
@@ -53,9 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         nave = (ImageView) findViewById(R.id.nave_id);
         tou = (TextView) findViewById(R.id.touch);
         disparo = (ImageView) findViewById(R.id.disp);
-
         navebonus = (ImageView) findViewById(R.id.naveBonus);
-
         tou.setOnTouchListener(this);
         enemigo1 = (ImageView) findViewById(R.id.ovni00);
         enemigo2 = (ImageView) findViewById(R.id.ovni01);
@@ -63,8 +58,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         enemigosVivos = 3;
         ast1 = (ImageView) findViewById(R.id.asteroide1);
         ast2 = (ImageView) findViewById(R.id.asteroide2);
-        puntuacionTxt = (TextView) findViewById(R.id.puntuacion);
-        musica = new Musica(this);
+        punt = (TextView) findViewById(R.id.puntuacion);
+        punt.setText("0");
+        puntuacion = 0;
+
+
+
 
 
         // Coge el objeto display para entrar a los datos de la pantalla
@@ -72,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         // Carga la resolución con un objeto Point
         size = new Point();
         display.getSize(size);
-        //Ahora podemos usar size.x | size.y para obtener el ancho y alto de la pantalla del dispositivo
+        //Ahora podemos usar size.x | size.y para obtener el ancho y alto de la pantalla
 
         Log.d("Ancho del disp", String.valueOf(size.x));
         Log.d("Alto del disp", String.valueOf(size.y));
@@ -89,13 +88,19 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         new Musica(this).reproducir2();
 
         //ejecuto el hilo
-
-        new Thread(new naveB(navebonus, size.x)).start();
-        new Thread(new Disparo(nave, disparo, this, size.y)).start();
-        new Thread(new Enemigo(enemigo1, enemigo2, enemigo3, size.x)).start();
-
+        naveB nv = new naveB(navebonus,size.x);
+        Disparo dis = new Disparo(nave ,disparo, this, size.y);
+        Enemigo enem = new Enemigo(enemigo1,enemigo2,enemigo3, size.x);
+        new Thread(nv).start();
+        new Thread(dis).start();
+        new Thread(enem).start();
         cs.start();
+    }
 
+    @Override
+    public void onBackPressed() {
+        try{System.exit(1);}
+        catch(Exception e){}
 
     }
 
@@ -120,40 +125,54 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         return false;
     }
 
-
-    class Colisiones extends Thread {
+    class Colisiones extends Thread{
         @Override
-        public void run() {
-            while (true) {
-                if (chocar(navebonus, disparo)) {
-                    navebonus.setX(navebonus.getX() - size.x * 2);
-                    disparo.setY(-(size.y * 2));
-                    musica.reproducir3();
-
-
+        public void run(){
+            while(true){
+                if(chocar(navebonus,disparo)){
+                    navebonus.setX(navebonus.getX()-size.x*2);
+                    disparo.setY(-(size.y*2));
+                    try{
+                        puntuacion += 5;
+                        punt.setText(String.valueOf(puntuacion));
+                    }
+                    catch(Exception e){}
+                    Log.d("NAVE BONUS DESTRUIDA", "");
                 }
-                if (chocar(enemigo1, disparo)) {
-                    enemigo1.setX(enemigo1.getX() - 2 * size.x);
-                    disparo.setY(-(size.y * 2));
+                if(chocar(enemigo1,disparo)){
+                    enemigo1.setX(enemigo1.getX()-2*size.x);
+                    disparo.setY(-(size.y*2));
                     enemigosVivos -= 1;
-                    musica.reproducir3();
-
+                    try{
+                        puntuacion += 1;
+                        punt.setText(String.valueOf(puntuacion));
+                    }
+                    catch(Exception e){}
+                    Log.d("NAVE 1", "");
                 }
-                if (chocar(enemigo2, disparo)) {
-                    enemigo2.setX(enemigo2.getX() - 2 * size.x);
-                    disparo.setY(-(size.y * 2));
+                if(chocar(enemigo2,disparo)){
+                    enemigo2.setX(enemigo2.getX()-2*size.x);
+                    disparo.setY(-(size.y*2));
                     enemigosVivos -= 1;
-                    musica.reproducir3();
-
+                    try{
+                        puntuacion += 1;
+                        punt.setText(String.valueOf(puntuacion));
+                    }
+                    catch(Exception e){}
+                    Log.d("NAVE 2", "");
                 }
-                if (chocar(enemigo3, disparo)) {
-                    enemigo3.setX(enemigo3.getX() - 2 * size.x);
-                    disparo.setY(-(size.y * 2));
+                if(chocar(enemigo3,disparo)){
+                    enemigo3.setX(enemigo3.getX()-2*size.x);
+                    disparo.setY(-(size.y*2));
                     enemigosVivos -= 1;
-                    musica.reproducir3();
-
+                    try{
+                        puntuacion += 1;
+                        punt.setText(String.valueOf(puntuacion));
+                    }
+                    catch(Exception e){}
+                    Log.d("NAVE 3", "");
                 }
-                if (enemigosVivos == 0) {
+                if((enemigosVivos==0)||(enemigo1.getY()>=size.y)){
                     enemigosVivos = 3;
                     enemigo1.setX(150);
                     enemigo2.setX(350);
@@ -161,20 +180,20 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     enemigo1.setY(200);
                     enemigo2.setY(200);
                     enemigo3.setY(200);
+                    Log.d("NAVES RESTABLECIDAS", "");
                 }
-                if (chocar(ast1, disparo) || (chocar(ast2, disparo))) {
-                    disparo.setY(-(size.y * 2));
+                if(chocar(ast1,disparo)||(chocar(ast2,disparo))){
+                    disparo.setY(-(size.y*2));
+                    Log.d("ASTEROIDE ALCANZADO", "");
                 }
             }
         }
 
-        public boolean chocar(ImageView obj, ImageView disp) {
-            if ((obj.getX() - 40 <= disp.getX()) && (obj.getX() + 40 >= disp.getX()) && (obj.getY() - 40 <= disp.getY()) && (obj.getY() + 40 >= disp.getY()) && (disp.getX() != 0)) {
+        public boolean chocar(ImageView obj, ImageView disp){
+            if((obj.getX()-40<=disp.getX())&&(obj.getX()+40>=disp.getX())&&(obj.getY()-40<=disp.getY())&&(obj.getY()+40>=disp.getY())&&(disp.getX()!=0)){
                 return true;
             }
             return false;
         }
     }
-
-
 }
