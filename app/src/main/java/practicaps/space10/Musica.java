@@ -36,4 +36,11 @@ public class Musica {
         m.start();
     }
 
+    public void reproducir3(){
+        m = MediaPlayer.create(context, R.raw.impacto);
+        m.setLooping(false);
+        //m.setVolume(100,100);
+        m.start();
+    }
+
 }
