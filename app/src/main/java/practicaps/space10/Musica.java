@@ -28,6 +28,9 @@ public class Musica {
         //m.setVolume(100,100);
         m.start();
     }
+    public void parar(){
+        m.stop();
+    }
 
     public void reproducir2() {
         m = MediaPlayer.create(context, R.raw.space);
