@@ -181,6 +181,24 @@
         android:layout_alignEnd="@+id/disp"
         android:visibility="invisible" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/zobjectasteroie"
+        android:id="@+id/asteroide3"
+        android:layout_alignTop="@+id/disparo2"
+        android:layout_alignEnd="@+id/asteroide2"
+        android:layout_alignBottom="@+id/disparo2" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/zobjectasteroie"
+        android:id="@+id/asteroide5"
+        android:layout_above="@+id/asteroide3"
+        android:layout_alignStart="@+id/disparoEnemigo1"
+        android:layout_alignEnd="@+id/disparoEnemigo1" />
+
     <TextView
         android:id="@+id/touch"
         android:layout_width="match_parent"
@@ -190,6 +208,15 @@
         android:textSize="24sp"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/zobjectasteroie"
+        android:id="@+id/asteroide4"
+        android:layout_above="@+id/asteroide5"
+        android:layout_alignStart="@+id/ovni02"
+        android:layout_toStartOf="@+id/disparoEnemigo3" />
 
 
 </RelativeLayout>
