@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         // Carga la resolución con un objeto Point
         size = new Point();
         display.getSize(size);
-        //Ahora podemos usar size.x | size.y para obtener el ancho y alto de la pantalla
+        //Ahora podemos usar size.x | size.y para obtener el ancho y alto de la pantalla del dispositivo
 
         Log.d("Ancho del disp", String.valueOf(size.x));
         Log.d("Alto del disp", String.valueOf(size.y));
