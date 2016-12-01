@@ -14,14 +14,14 @@ import android.media.AudioManager;
  * Created by Marco on 21/10/2016.
  */
 
-public class Disparo implements Runnable {
+public class Disparo extends Thread {
 
     private ImageView nave;
     private ImageView disparo;
     private float coordenadaDisparo;
     public Context cont;
     private int inicialY;
-
+    private boolean fin = false;
 
 
     public Disparo(ImageView nave, ImageView disparo, Context c, int sizeY) {
@@ -33,11 +33,20 @@ public class Disparo implements Runnable {
         disparo.setVisibility(View.VISIBLE);
     }
 
+    public boolean isFin() {
+        return fin;
+    }
+
+    public void setFin(boolean fin) {
+        this.fin = fin;
+    }
+
     @Override
     public void run() {
+
         try{Thread.sleep(1000);}
-        catch(Exception e){};
-        while (true) {
+        catch(Exception e){}
+        while (!fin) {
             try {
                 Thread.sleep(500);
             } catch (InterruptedException e) {
