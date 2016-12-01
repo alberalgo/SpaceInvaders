@@ -18,7 +18,7 @@ public class Enemigo implements Runnable{
         enemigo1 = en1;
         enemigo2 = en2;
         enemigo3 = en3;
-        anchoPantalla = ancho-150;
+        anchoPantalla = ancho-120;
     }
 
     @Override

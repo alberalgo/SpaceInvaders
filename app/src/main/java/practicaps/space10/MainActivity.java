@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -20,17 +19,13 @@ import android.content.Context;
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
 
     //declaro variables para los componentes
-    private ImageButton botonSonido;
-    private ImageView nave1;
-    private ImageView nave2;
+
     private ImageView nave;
     private ImageView disparo;
-    private ImageView disparo2;
     private ImageView navebonus;
     private TextView tou;
     private Colisiones cs = new Colisiones();
     private int enemigosVivos;
-    private int asteroides;
     public Point size;
     public TextView punt;
     private int puntuacion;
@@ -45,10 +40,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     //Asteroides
     private ImageView ast1;
     private ImageView ast2;
-    private ImageView ast3;
-    private ImageView ast4;
-    private ImageView ast5;
-
 
     //Disparo enemigo
     private ImageView dispEnemigo3;
@@ -72,10 +63,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         //relaciono la variable nave con el objeto nave por su id, y así con el resto
         layoutprincipal = (RelativeLayout) findViewById(R.id.activity_main);
         context = this;
-        nave1=(ImageView) findViewById(R.id.nave1);
         nave = (ImageView) findViewById(R.id.nave_id);
         tou = (TextView) findViewById(R.id.touch);
-        disparo2=(ImageView) findViewById(R.id.disparo2);
         disparo = (ImageView) findViewById(R.id.disp);
         navebonus = (ImageView) findViewById(R.id.naveBonus);
         tou.setOnTouchListener(this);
@@ -83,12 +72,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         enemigo2 = (ImageView) findViewById(R.id.ovni01);
         enemigo3 = (ImageView) findViewById(R.id.ovni02);
         enemigosVivos = 3;
-        asteroides=1;
-        ast3 = (ImageView) findViewById(R.id.asteroide3);
         ast1 = (ImageView) findViewById(R.id.asteroide1);
         ast2 = (ImageView) findViewById(R.id.asteroide2);
-        ast4 =(ImageView) findViewById(R.id.asteroide4);
-        ast5 =(ImageView) findViewById(R.id.asteroide5);
         punt = (TextView) findViewById(R.id.puntuacion);
         punt.setText("0");
         puntuacion = 0;
@@ -99,7 +84,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         vida2 = (ImageView) findViewById(R.id.vida2);
         vida3 = (ImageView) findViewById(R.id.vida3);
         vidas = 3;
-
 
 
 
@@ -128,22 +112,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         new Musica(this).reproducir2();
 
         //ejecuto el hilo
-        Nave2 nv1 = new Nave2(nave1,size.x);
-
         naveB nv = new naveB(navebonus,size.x);
         Disparo dis = new Disparo(nave ,disparo, this, size.y);
         Enemigo enem = new Enemigo(enemigo1,enemigo2,enemigo3, size.x);
-        AsteroideEnMovimiento ast = new AsteroideEnMovimiento(ast3,size.x);
-        AsteroideEnMovimiento ast1 = new AsteroideEnMovimiento(ast4,size.x);
-        AsteroideEnMovimiento ast2 = new AsteroideEnMovimiento(ast5,size.x);
-        new Thread(ast2).start();
-        new Thread(ast1).start();
-        new Thread(ast).start();
-        new Thread (nv1).start();
         new Thread(nv).start();
         new Thread(dis).start();
         new Thread(enem).start();
-        new Thread (new DisparoEnemigo(nave1,disparo2,nave,size.y)).start();
         new Thread(new DisparoEnemigo(enemigo3, dispEnemigo3, nave, size.y)).start();
         new Thread(new DisparoEnemigo(enemigo2, dispEnemigo2, nave, size.y)).start();
         new Thread(new DisparoEnemigo(enemigo1, dispEnemigo1, nave, size.y)).start();
@@ -183,7 +157,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         public void run(){
             while(true){
                 if(vidas==0){
-
                     //PERDER
                 }
                 if(chocar(navebonus,disparo)){
@@ -197,29 +170,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     Log.d("NAVE BONUS DESTRUIDA", "");
                     new Musica(context).reproducir3();
                 }
-                if(chocar (nave1,disparo)){
-                    nave1.setX(nave1.getX()-size.x*2);
-                    disparo.setY(-(size.y*2));
-                    try{
-                        puntuacion+=5;
-                        punt.setText(String.valueOf(puntuacion));
-                    }catch(Exception ex){
-
-                    }Log.d("Nave1 destruida","");
-                    new Musica(context).reproducir3();
-                }
-
-
-                /*if(chocar(ast3,disparo)) {
-                    ast3.setX(ast3.getX() - 2 * size.x);
-                    disparo.setY(-(size.y * 2));
-                    asteroides -= 1;
-
-
-                    new Musica(context).reproducir3();
-                }*/
-
-                    if(chocar(enemigo1,disparo)){
+                if(chocar(enemigo1,disparo)){
                     enemigo1.setX(enemigo1.getX()-2*size.x);
                     disparo.setY(-(size.y*2));
                     enemigosVivos -= 1;
@@ -264,24 +215,17 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     quitarVida();
                     dispEnemigo2.setY(size.y*2);
                 }
-
                 if(chocar(nave, dispEnemigo3)){
                     quitarVida();
                     dispEnemigo3.setY(size.y*2);
                 }
-                if(chocar(nave,disparo2)){
-                    quitarVida();
-                    disparo2.setY(size.y*2);
-                }
-
-
-                if((chocar(ast1, dispEnemigo1))||(chocar(ast2,dispEnemigo1))||chocar(ast3,dispEnemigo1)||chocar(ast4,dispEnemigo1)||chocar(ast5,dispEnemigo1)){
+                if((chocar(ast1, dispEnemigo1))||(chocar(ast2,dispEnemigo1))){
                     dispEnemigo1.setY(size.y*2);
                 }
-                if((chocar(ast1, dispEnemigo2))||(chocar(ast2,dispEnemigo2))||chocar(ast3,dispEnemigo2)||chocar(ast4,dispEnemigo2)||chocar(ast5,dispEnemigo2)){
+                if((chocar(ast1, dispEnemigo2))||(chocar(ast2,dispEnemigo2))){
                     dispEnemigo2.setY(size.y*2);
                 }
-                if((chocar(ast1, dispEnemigo3))||(chocar(ast2,dispEnemigo3))||chocar(ast3,dispEnemigo3)|| chocar(ast4,dispEnemigo3)||chocar(ast5,dispEnemigo3)){
+                if((chocar(ast1, dispEnemigo3))||(chocar(ast2,dispEnemigo3))){
                     dispEnemigo3.setY(size.y*2);
                 }
 
@@ -292,7 +236,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 if(enemigosVivos==0){
                     reestablecerNaves();
                 }
-                if(chocar(ast1,disparo)|| chocar(ast2,disparo)||(chocar(ast3,disparo)||chocar(ast4,disparo)||chocar(ast5,disparo))){
+                if(chocar(ast1,disparo)||(chocar(ast2,disparo))){
                     disparo.setY(-(size.y*2));
                     Log.d("ASTEROIDE ALCANZADO", "");
                 }
