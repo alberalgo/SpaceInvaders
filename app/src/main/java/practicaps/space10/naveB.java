@@ -10,6 +10,7 @@ public class naveB extends Thread {
     private ImageView naveBon;
     private float inicialX;
     private boolean fin = false;
+    private int velocidad;
 
     public boolean isFin() {
         return fin;
@@ -23,6 +24,7 @@ public class naveB extends Thread {
         naveBon = nave;
         inicialX = sizeX;
         naveBon.setX(naveBon.getX()+300);
+        velocidad = 15;
     }
 
     @Override
@@ -31,7 +33,7 @@ public class naveB extends Thread {
             try{
                 while(naveBon.getX()>-60) {
                     naveBon.setX(naveBon.getX() - 1);
-                    Thread.sleep(15);
+                    Thread.sleep(velocidad);
                 }
                 naveBon.setX(inicialX);
                 //30 SEGUNDOS ENTRE CADA NAVE BONUS DESDE QUE DESAPARECE
@@ -39,5 +41,10 @@ public class naveB extends Thread {
             }
             catch (Exception e) {e.printStackTrace();}
         }
+    }
+
+    public void aumentarVelocidad(){
+        if(velocidad==1){}
+        else velocidad  -=1;
     }
 }
