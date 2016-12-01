@@ -22,12 +22,13 @@ public class Disparo extends Thread {
     public Context cont;
     private int inicialY;
     private boolean fin = false;
+    public String sil;
 
-
-    public Disparo(ImageView nave, ImageView disparo, Context c, int sizeY) {
+    public Disparo(ImageView nave, ImageView disparo, Context c, int sizeY, String sil) {
         this.nave = nave;
         this.disparo = disparo;
         this.cont=c;
+        this.sil=sil;
         inicialY = sizeY;
         disparo.setY(-inicialY);
         disparo.setVisibility(View.VISIBLE);
@@ -57,7 +58,10 @@ public class Disparo extends Thread {
     }
 
     public void Disparo(ImageView nave, ImageView disparo) {
-        new Musica(cont).reproducir();
+        //new Musica(cont).reproducir();
+        if(!sil.equals("1")){
+            new Musica(cont).reproducir();
+        }
 
         disparo.setX(nave.getX());
         disparo.setY(nave.getY());

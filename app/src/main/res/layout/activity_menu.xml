@@ -28,4 +28,12 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/sonidoon"
+        android:id="@+id/boton_sonido"
+        android:layout_alignTop="@+id/bot_emp"
+        android:layout_toEndOf="@+id/bot_emp" />
+
 </RelativeLayout>
