@@ -1,10 +1,12 @@
 package practicaps.space10;
 
+import android.app.Activity;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.content.Intent;
@@ -15,6 +17,9 @@ import android.net.Uri;
 public class Menu extends AppCompatActivity {
 
     public Button boton_empezar;
+    public ImageButton boton_silencio;
+    public MainActivity juego;
+    public int pulsado;
 
 
     @Override
@@ -25,6 +30,7 @@ public class Menu extends AppCompatActivity {
 
         //declaraciones para salto a otra pantalla
         boton_empezar = (Button) findViewById(R.id.bot_emp);
+        boton_silencio = (ImageButton) findViewById(R.id.sound);
         VideoView videoView = (VideoView)findViewById(R.id.videoGif);
 
 
@@ -43,17 +49,27 @@ public class Menu extends AppCompatActivity {
 
         videoView.start();
 
-
-
-        boton_empezar.setOnClickListener(new View.OnClickListener() {
+        boton_silencio.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent boton_empezar = new Intent(Menu.this, MainActivity.class);
-                startActivity(boton_empezar);
-
-
+              pulsado = 1;
             }
 
         });
+
+        boton_empezar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent empezar = new Intent(Menu.this, MainActivity.class);
+                if(pulsado==1){
+                    empezar.putExtra("silenciar_sonido", "1");
+                }else{
+                    empezar.putExtra("silenciar_sonido", "0");
+                }
+                startActivity(empezar);
+            }
+
+        });
+
+
     }
 }
 

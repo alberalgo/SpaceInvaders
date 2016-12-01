@@ -52,6 +52,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private ImageView vida3;
     private int vidas;
 
+    //sonido
+    public String silencio;
+
 
 
     @Override
@@ -85,7 +88,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         vida3 = (ImageView) findViewById(R.id.vida3);
         vidas = 3;
 
-
+        //obtengo el silenciar sonido si o no
+        String sound = getIntent().getStringExtra("silenciar_sonido");
+        silencio = sound;
+        Log.d("el valor del sonido es", sound);
 
 
 
@@ -101,15 +107,14 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         Log.d("Alto del disp", String.valueOf(size.y));
 
 
-        //coloco la nave enemiga en el centro del eje X
-        //enem.setX(size.x/2);
-        /*
-        //coloco la nave enemiga en la parte superior del eje Y
-        enem.setY(size.y/2);
-        */
 
-        new Musica(this).reproducir();
-        new Musica(this).reproducir2();
+
+        if(silencio.equals("1")){
+            //se silencia la app y no hay que inicar sonidos
+        }else{
+            new Musica(this).reproducir();
+            new Musica(this).reproducir2();
+        }
 
         //ejecuto el hilo
         naveB nv = new naveB(navebonus,size.x);
@@ -278,5 +283,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             }
             catch(Exception e){}
         }
+
     }
 }
