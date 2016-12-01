@@ -1,5 +1,4 @@
 package practicaps.space10;
-import android.view.View;
 import android.widget.ImageView;
 
 /**
@@ -14,6 +13,7 @@ public class Enemigo extends Thread{
     private ImageView enemigo2;
     private ImageView enemigo3;
     private boolean fin = false;
+    private int velocidad;
 
 
     public Enemigo(ImageView en1, ImageView en2, ImageView en3, int ancho){
@@ -22,6 +22,7 @@ public class Enemigo extends Thread{
         enemigo2 = en2;
         enemigo3 = en3;
         anchoPantalla = ancho-120;
+        velocidad = 6;
     }
 
     public boolean isFin() {
@@ -58,9 +59,14 @@ public class Enemigo extends Thread{
                     enemigo2.setX(enemigo2.getX() + 1);
                     enemigo3.setX(enemigo3.getX() + 1);
                 }
-                Thread.sleep(4);
+                Thread.sleep(velocidad);
             }
             catch (Exception e) {e.printStackTrace();}
         }
+    }
+
+    public void aumentarVelocidad(){
+        if(velocidad==1){}
+        else velocidad-=1;
     }
 }
