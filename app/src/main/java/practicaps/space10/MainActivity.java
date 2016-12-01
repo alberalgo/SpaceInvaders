@@ -1,19 +1,19 @@
 package practicaps.space10;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
-import android.media.Image;
+import android.os.Bundle;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.*;
+import android.view.Display;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.media.MediaPlayer;
-import android.content.Context;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
@@ -66,6 +66,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private DisparoEnemigo disEn3;
 >>>>>>> master
 
+    //Musica
+    private Musica musicafondo;
+
     private Button botonGameover;
     private TextView textoGameOver;
     private boolean isGameOver = false;
@@ -116,6 +119,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         textoGameOver = (TextView) findViewById(R.id.textogameover);
         textoGameOver.setVisibility(View.INVISIBLE);
         botonGameover.setVisibility(View.INVISIBLE);
+<<<<<<< HEAD
+>>>>>>> master
+=======
+        musicafondo = new Musica(this);
 >>>>>>> master
 
         // Coge el objeto display para entrar a los datos de la pantalla
@@ -142,7 +149,11 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         goreinicio = new Intent();
 
         new Musica(this).reproducir();
+<<<<<<< HEAD
         new Musica(this).reproducir2();
+>>>>>>> master
+=======
+        musicafondo.reproducir2();
 >>>>>>> master
 
         //ejecuto el hilo
@@ -227,6 +238,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     isGameOver = true;
                     try {
                         layoutprincipal.setBackgroundResource(R.drawable.backgameover);
+                        musicafondo.parar();
                         disparo.setVisibility(View.INVISIBLE);
                         navebonus.setVisibility(View.INVISIBLE);
                         nave.setVisibility(View.INVISIBLE);
