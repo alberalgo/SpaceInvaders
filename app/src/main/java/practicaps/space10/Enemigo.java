@@ -7,12 +7,13 @@ import android.widget.ImageView;
  */
 
 
-public class Enemigo implements Runnable{
+public class Enemigo extends Thread{
     int direccion; //1 izquierda, 0 derecha
     float anchoPantalla;
     private ImageView enemigo1;
     private ImageView enemigo2;
     private ImageView enemigo3;
+    private boolean fin = false;
 
 
     public Enemigo(ImageView en1, ImageView en2, ImageView en3, int ancho){
@@ -23,9 +24,17 @@ public class Enemigo implements Runnable{
         anchoPantalla = ancho-120;
     }
 
+    public boolean isFin() {
+        return fin;
+    }
+
+    public void setFin(boolean fin) {
+        this.fin = fin;
+    }
+
     @Override
     public void run() {
-        while (true) {
+        while (!fin) {
             try{
                 if((enemigo1.getX()==25)||(enemigo2.getX()==25)||(enemigo3.getX()==25)){
                     direccion = 0;
