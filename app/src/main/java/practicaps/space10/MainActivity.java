@@ -68,6 +68,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private boolean isGameOver = false;
     private Intent goreinicio;
 
+    //sonido
+    public String silencio;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,12 +128,21 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         goreinicio = new Intent();
 
-        new Musica(this).reproducir();
-        musicafondo.reproducir2();
+        //obtengo el silenciar sonido si o no
+        String sound = getIntent().getStringExtra("silenciar_sonido");
+        silencio = sound;
+
+        if(silencio.equals("1")){
+            //se silencia la app y no hay que inicar sonidos
+        }else{
+            new Musica(this).reproducir();
+            new Musica(this).reproducir2();
+        }
+
 
         //ejecuto el hilo
         nv = new naveB(navebonus, size.x);
-        dis = new Disparo(nave, disparo, this, size.y);
+        dis = new Disparo(nave, disparo, this, size.y, silencio);
         enem = new Enemigo(enemigo1, enemigo2, enemigo3, size.x);
         disEn1 = new DisparoEnemigo(enemigo3, dispEnemigo3, nave, size.y);
         disEn2 = new DisparoEnemigo(enemigo2, dispEnemigo2, nave, size.y);
@@ -151,6 +163,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         } catch (Exception e) {
         }
 
+    }
+
+    public String getSilencio() {
+        return silencio;
     }
 
     @Override
@@ -251,7 +267,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     } catch (Exception e) {
                     }
                     Log.d("NAVE BONUS DESTRUIDA", "");
-                    new Musica(context).reproducir3();
+                    if(!silencio.equals("1")){
+                        new Musica(context).reproducir3();
+                    }
                 }
                 if (chocar(enemigo1, disparo)) {
                     enemigo1.setX(enemigo1.getX() - 2 * size.x);
@@ -263,7 +281,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     } catch (Exception e) {
                     }
                     Log.d("NAVE 1", "");
-                    new Musica(context).reproducir3();
+                    if(!silencio.equals("1")){
+                        new Musica(context).reproducir3();
+                    }
 
                 }
                 if (chocar(enemigo2, disparo)) {
@@ -276,7 +296,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     } catch (Exception e) {
                     }
                     Log.d("NAVE 2", "");
-                    new Musica(context).reproducir3();
+                    if(!silencio.equals("1")){
+                        new Musica(context).reproducir3();
+                    }
                 }
                 if (chocar(enemigo3, disparo)) {
                     enemigo3.setX(enemigo3.getX() - 2 * size.x);
@@ -287,7 +309,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                         punt.setText(String.valueOf(puntuacion));
                     } catch (Exception e) {
                     }
-                    new Musica(context).reproducir3();
+                    if(!silencio.equals("1")){
+                        new Musica(context).reproducir3();
+                    }
                     Log.d("NAVE 3", "");
                 }
                 if (chocar(nave, dispEnemigo1)) {
