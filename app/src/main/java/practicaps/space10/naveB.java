@@ -1,15 +1,23 @@
 package practicaps.space10;
-import android.util.Log;
-import android.view.View;
+
 import android.widget.ImageView;
 
 /**
  * Created by Sergio on 12/11/2016.
  */
 
-public class naveB implements Runnable {
+public class naveB extends Thread {
     private ImageView naveBon;
     private float inicialX;
+    private boolean fin = false;
+
+    public boolean isFin() {
+        return fin;
+    }
+
+    public void setFin(boolean fin) {
+        this.fin = fin;
+    }
 
     public naveB(ImageView nave, int sizeX) {
         naveBon = nave;
@@ -19,7 +27,7 @@ public class naveB implements Runnable {
 
     @Override
     public void run() {
-        while (true) {
+        while (!fin) {
             try{
                 while(naveBon.getX()>-60) {
                     naveBon.setX(naveBon.getX() - 1);

@@ -8,12 +8,13 @@ import android.widget.ImageView;
  * Created by Sergio on 20/11/2016.
  */
 
-public class DisparoEnemigo implements Runnable {
+public class DisparoEnemigo extends Thread {
     private ImageView enemigo;
     private ImageView disparo;
     private ImageView nave;
     private boolean disparando;
     private int sizeY;
+    private boolean fin = false;
 
     public DisparoEnemigo(ImageView enem, ImageView disp, ImageView n, int Y){
         enemigo = enem;
@@ -25,11 +26,20 @@ public class DisparoEnemigo implements Runnable {
         disparo.setVisibility(View.VISIBLE);
     }
 
+    public boolean isFin() {
+        return fin;
+    }
+
+    public void setFin(boolean fin) {
+        this.fin = fin;
+    }
+
     @Override
     public void run(){
         try{Thread.sleep(1000);}
-        catch(Exception e){};
-        while(true){
+        catch(Exception e){}
+        while(!fin){
+
             try {
                 disparar();
                 moverDisparo();
