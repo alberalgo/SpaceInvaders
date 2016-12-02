@@ -61,8 +61,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private DisparoEnemigo disEn3;
 
     //Musica
-    private Musica musicafondo;
 
+    public Musica m1;
+    public Musica m2;
     private Button botonGameover;
     private TextView textoGameOver;
     private boolean isGameOver = false;
@@ -106,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         textoGameOver = (TextView) findViewById(R.id.textogameover);
         textoGameOver.setVisibility(View.INVISIBLE);
         botonGameover.setVisibility(View.INVISIBLE);
-        musicafondo = new Musica(this);
+        //musicafondo = new Musica(this);
 
         // Coge el objeto display para entrar a los datos de la pantalla
         Display display = getWindowManager().getDefaultDisplay();
@@ -135,8 +136,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         if(silencio.equals("1")){
             //se silencia la app y no hay que inicar sonidos
         }else{
-            new Musica(this).reproducir();
-            new Musica(this).reproducir2();
+            m1= new Musica(this);
+            m1.reproducir();
+            m2=new Musica(this);
+            m2.reproducir2();
         }
 
 
@@ -158,7 +161,11 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     @Override
     public void onBackPressed() {
-        musicafondo.parar();
+        if(!silencio.equals("1")){
+            m1.parar();
+            m2.parar();
+        }
+        //musicafondo.parar();
         nv.setFin(true);
         dis.setFin(true);
         enem.setFin(true);
@@ -232,7 +239,11 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     isGameOver = true;
                     try {
                         layoutprincipal.setBackgroundResource(R.drawable.backgameover);
-                        musicafondo.parar();
+                        //musicafondo.parar();
+                        if(!silencio.equals("1")){
+                            m1.parar();
+                            m2.parar();
+                        }
                         disparo.setVisibility(View.INVISIBLE);
                         navebonus.setVisibility(View.INVISIBLE);
                         nave.setVisibility(View.INVISIBLE);
