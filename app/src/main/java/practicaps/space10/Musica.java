@@ -1,10 +1,7 @@
 package practicaps.space10;
 
-import android.net.Uri;
-import android.util.Log;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.content.Context;
+import android.media.MediaPlayer;
 
 /**
  * Created by alberto on 23/10/16.
@@ -41,6 +38,10 @@ public class Musica {
         m.setLooping(false);
         //m.setVolume(100,100);
         m.start();
+    }
+
+    public void parar(){
+        m.stop();
     }
 
 }
