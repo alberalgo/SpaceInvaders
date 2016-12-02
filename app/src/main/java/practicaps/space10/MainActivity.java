@@ -158,11 +158,17 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     @Override
     public void onBackPressed() {
-        try {
-            System.exit(1);
-        } catch (Exception e) {
-        }
-
+        musicafondo.parar();
+        nv.setFin(true);
+        dis.setFin(true);
+        enem.setFin(true);
+        disEn1.setFin(true);
+        disEn2.setFin(true);
+        disEn3.setFin(true);
+        cs.setFin(true);
+        goreinicio.setClass(MainActivity.this, new Menu().getClass());
+        startActivity(goreinicio);
+        finish();
     }
 
     public String getSilencio() {
