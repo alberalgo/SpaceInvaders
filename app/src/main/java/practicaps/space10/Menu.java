@@ -1,5 +1,6 @@
 package practicaps.space10;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,13 +12,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.VideoView;
-
+import android.widget.Toast;
+import android.view.Gravity;
 
 public class Menu extends AppCompatActivity {
 
     public Button boton_empezar;
     public ImageButton boton_silencio;
     public int pulsado=0;
+    public Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +32,7 @@ public class Menu extends AppCompatActivity {
         boton_empezar = (Button) findViewById(R.id.bot_emp);
         boton_silencio = (ImageButton) findViewById(R.id.boton_sonido);
         final VideoView videoView = (VideoView) findViewById(R.id.videoGif);
-
+        context = this;
 
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
@@ -70,8 +73,10 @@ public class Menu extends AppCompatActivity {
 
                 if ((pulsado % 2) != 0) {
                     intent.putExtra("silenciar_sonido", "1");
+                    Toast.makeText(getApplicationContext(), "Sonido desactivado", Toast.LENGTH_SHORT).show();
                 }else{
                     intent.putExtra("silenciar_sonido", "0");
+                    Toast.makeText(getApplicationContext(), "Sonido activado", Toast.LENGTH_SHORT).show();
                 }
                 startActivity(intent);
                 finish();
