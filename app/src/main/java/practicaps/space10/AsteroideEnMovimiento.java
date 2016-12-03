@@ -3,7 +3,7 @@ package practicaps.space10;
 import android.widget.ImageView;
 
 /**
- * Created by danic on 01/12/2016.
+ * Created by danic on 03/12/2016.
  */
 
 public class AsteroideEnMovimiento implements Runnable {
@@ -13,7 +13,7 @@ public class AsteroideEnMovimiento implements Runnable {
     public AsteroideEnMovimiento(ImageView asteroide, float ancho ){
         this.direccion=1;
         this.asteroide= asteroide;
-        this.pantalla=ancho -350;
+        this.pantalla=ancho -300;
 
 
     }
@@ -41,10 +41,9 @@ public class AsteroideEnMovimiento implements Runnable {
                     asteroide.setX(asteroide.getX() + 1);
 
                 }
-                Thread.sleep(15);
+                Thread.sleep(10);
             }
             catch (Exception e) {e.printStackTrace();}
         }
     }
-
 }

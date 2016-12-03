@@ -3,10 +3,11 @@ package practicaps.space10;
 import android.widget.ImageView;
 
 /**
- * Created by danic on 02/12/2016.
+ * Created by danic on 03/12/2016.
  */
 
-public class Nave2 implements  Runnable {
+public class Nave2 implements Runnable {
+
     private ImageView nave2;
     private float inicialX;
 
@@ -31,5 +32,4 @@ public class Nave2 implements  Runnable {
             catch (Exception e) {e.printStackTrace();}
         }
     }
-
 }

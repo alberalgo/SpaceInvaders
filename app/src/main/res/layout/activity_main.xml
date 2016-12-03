@@ -13,15 +13,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="practicaps.space10.MainActivity">
 
-    <TextView
-        android:id="@+id/touch"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:textAlignment="center"
-        android:textColor="@android:color/background_light"
-        android:textSize="24sp" />
-
     <Button
         android:id="@+id/buttonDerecha"
         android:layout_width="wrap_content"
@@ -194,46 +185,48 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/nave"
+        app:srcCompat="@drawable/alienspaceship"
         android:layout_above="@+id/asteroide2"
         android:layout_alignParentEnd="true"
+        android:layout_marginBottom="24dp"
         android:id="@+id/nave1" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/municion"
-        android:id="@+id/municion1"
-        android:layout_alignTop="@+id/asteroide2"
+        app:srcCompat="@drawable/ray"
+        android:layout_alignTop="@+id/nave1"
         android:layout_centerHorizontal="true"
+        android:id="@+id/disparoEnemigo"
         android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/touch"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light"
+        android:textSize="24sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/municion"
-        android:layout_alignTop="@+id/asteroide3"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/municion2"
-        android:visibility="invisible" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/nave"
-        android:id="@+id/nave2"
-        android:layout_above="@+id/municion2"
-        android:layout_alignEnd="@+id/buttonreinicio" />
+        app:srcCompat="@drawable/zobjectasteroie"
+        android:id="@+id/asteroide4"
+        android:layout_above="@+id/ovni00"
+        android:layout_alignEnd="@+id/ovni01"
+        android:layout_alignTop="@+id/disparoEnemigo2" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/zobjectasteroie"
         android:id="@+id/asteroide3"
-        android:adjustViewBounds="false"
-        android:cropToPadding="false"
-        android:layout_above="@+id/nave1"
-        android:layout_alignParentStart="true" />
+        android:layout_above="@+id/disparoEnemigo"
+        android:layout_alignStart="@+id/disparoEnemigo"
+        android:layout_toStartOf="@+id/ovni02" />
 
 
 </RelativeLayout>
