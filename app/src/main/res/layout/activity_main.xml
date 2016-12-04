@@ -191,14 +191,5 @@
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/vida2" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/zobjectasteroie"
-        android:layout_above="@+id/asteroide1"
-        android:layout_toEndOf="@+id/ovni00"
-        android:layout_marginBottom="34dp"
-        android:id="@+id/asteroide3" />
-
 
 </RelativeLayout>
