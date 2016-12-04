@@ -3,7 +3,7 @@ package practicaps.space10;
 import android.widget.ImageView;
 
 /**
- * Created by danic on 03/12/2016.
+ * Created by danic on 04/12/2016.
  */
 
 public class AsteroideEnMovimiento implements Runnable {

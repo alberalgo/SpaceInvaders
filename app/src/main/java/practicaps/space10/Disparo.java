@@ -1,14 +1,8 @@
 package practicaps.space10;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.media.AudioAttributes;
-import android.provider.MediaStore;
-import android.media.SoundPool;
-import android.media.AudioManager;
 
 /**
  * Created by Marco on 21/10/2016.
@@ -21,7 +15,6 @@ public class Disparo extends Thread {
     private float coordenadaDisparo;
     public Context cont;
     private int inicialY;
-    private boolean fin = false;
     public String sil;
 
     public Disparo(ImageView nave, ImageView disparo, Context c, int sizeY, String sil) {
@@ -34,30 +27,15 @@ public class Disparo extends Thread {
         disparo.setVisibility(View.VISIBLE);
     }
 
-    public boolean isFin() {
-        return fin;
-    }
-
-    public void setFin(boolean fin) {
-        this.fin = fin;
-    }
-
     @Override
     public void run() {
-
-        try{Thread.sleep(1000);}
-        catch(Exception e){}
-        while (!fin) {
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        try{
             Disparo(this.nave, this.disparo);
         }
+        catch(Exception e){}
     }
 
-    public void Disparo(ImageView nave, ImageView disparo) {
+    public void Disparo (ImageView nave, ImageView disparo) throws Exception{
         //new Musica(cont).reproducir();
         if(!sil.equals("1")){
             new Musica(cont).reproducir();
