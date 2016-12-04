@@ -54,11 +54,11 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     //Clase con Hilo
     private naveB nv;
-    private Disparo dis;
     private Enemigo enem;
     private DisparoEnemigo disEn1;
     private DisparoEnemigo disEn2;
     private DisparoEnemigo disEn3;
+    private Disparo dis;
 
     //Musica
     public Musica m1;
@@ -149,13 +149,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         //ejecuto el hilo
         nv = new naveB(navebonus, size.x);
-        dis = new Disparo(nave, disparo, this, size.y, silencio);
         enem = new Enemigo(enemigo1, enemigo2, enemigo3, size.x);
         disEn1 = new DisparoEnemigo(enemigo3, dispEnemigo3, nave, size.y);
         disEn2 = new DisparoEnemigo(enemigo2, dispEnemigo2, nave, size.y);
         disEn3 = new DisparoEnemigo(enemigo1, dispEnemigo1, nave, size.y);
+        dis = new Disparo(nave, disparo, this, size.y, silencio);
         nv.start();
-        dis.start();
         enem.start();
         disEn1.start();
         disEn2.start();
@@ -171,7 +170,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         }
         //musicafondo.parar();
         nv.setFin(true);
-        dis.setFin(true);
         enem.setFin(true);
         disEn1.setFin(true);
         disEn2.setFin(true);
@@ -206,11 +204,20 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             case (MotionEvent.ACTION_DOWN):
 
                 if (isGameOver) {
-                    isGameOver = false;
                     goreinicio.setClass(MainActivity.this, new Menu().getClass());
                     startActivity(goreinicio);
                     finish();
                 }
+                return true;
+
+            case (MotionEvent.ACTION_POINTER_DOWN):
+                try{
+                    if((vidas>0)&&(!dis.isAlive())){
+                        dis = new Disparo(nave, disparo, this, size.y, silencio);
+                        dis.start();
+                    }
+                }
+                catch(Exception e){}
                 return true;
 
             case (MotionEvent.ACTION_MOVE):
@@ -266,7 +273,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                         //botonGameover.setVisibility(View.VISIBLE);
                         //textoGameOver.setText( "PUNTUACIÓN PLAYER_1 -->" + String.valueOf(puntuacion));
                         nv.setFin(true);
-                        dis.setFin(true);
                         enem.setFin(true);
                         disEn1.setFin(true);
                         disEn2.setFin(true);
