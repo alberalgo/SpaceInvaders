@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private DisparoEnemigo disEn3;
 
     //Musica
-
     public Musica m1;
     public Musica m2;
     private Button botonGameover;
@@ -71,6 +70,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     //sonido
     public String silencio;
+
+    //Dificultad
+    long tiempo;
+    final long tiempoAumento = 30000;    //tiempo en milisegundos tras el que aumenta la dificultad
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         textoGameOver = (TextView) findViewById(R.id.textogameover);
         textoGameOver.setVisibility(View.INVISIBLE);
         botonGameover.setVisibility(View.INVISIBLE);
+        tiempo = System.currentTimeMillis();
         //musicafondo = new Musica(this);
 
         // Coge el objeto display para entrar a los datos de la pantalla
@@ -361,8 +365,13 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     reestablecerNaves();
                 }
                 if (chocar(ast1, disparo) || (chocar(ast2, disparo))) {
-                    disparo.setY(-(size.y * 2));
+                    disparo.setX(size.x*2);
                     Log.d("ASTEROIDE ALCANZADO", "");
+                }
+                if(tiempo+tiempoAumento<System.currentTimeMillis()){
+                    tiempo = System.currentTimeMillis();
+                    aumentarDificultad();
+                    Log.d("DIFICULTAD AUMENTADA", "");
                 }
             }
         }
@@ -401,6 +410,17 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 }
             } catch (Exception e) {
             }
+        }
+
+        public void aumentarDificultad(){
+            nv.aumentarVelocidad();
+            enem.aumentarVelocidad();
+            disEn1.aumentarVelocidad();
+            disEn1.aumentarProbDisparo();
+            disEn2.aumentarVelocidad();
+            disEn2.aumentarProbDisparo();
+            disEn3.aumentarVelocidad();
+            disEn3.aumentarProbDisparo();
         }
     }
 }
