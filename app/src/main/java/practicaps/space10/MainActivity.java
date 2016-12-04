@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private boolean isGameOver = false;
     private Intent goreinicio;
 
-    //sonido
+    //sonidos
     public String silencio;
 
     //Dificultad
